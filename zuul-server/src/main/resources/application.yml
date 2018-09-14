@@ -1,0 +1,26 @@
+server:
+  port: 5001
+spring:
+  application:
+    name: zuul-server
+zuul:
+  ignored-services: '*'
+  host:
+    max-total-connections: 1000
+    max-per-route-connections: 1000
+  routes:
+    student-service:
+      path: /student/**
+      sensitive-headers: null
+      service-id: student-service
+      strip-prefix: false
+    admission-service:
+      path: /admission/**
+      sensitive-headers: null
+      service-id: admission-service
+      strip-prefix: false
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8700/eureka/
